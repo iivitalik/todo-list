@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Task, Tag
 
 
@@ -69,8 +70,16 @@ class TaskDeleteView(DeleteView):
         return reverse_lazy("todo:index")
 
 
-def toggle_task_status(request, pk):
+def post(request, pk):
     task = get_object_or_404(Task, pk=pk)
     task.done = not task.done
     task.save()
     return redirect("todo:index")
+
+
+class ToggleTaskStatusView(View):
+    def post(self, request, pk):
+        task = get_object_or_404(Task, pk=pk)
+        task.done = not task.done
+        task.save(update_fields=["done"])
+        return redirect("index")
