@@ -5,8 +5,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import Task, Tag
 
 
-
-
 def index(request):
     tasks = Task.objects.all().order_by("-datetime")
 
