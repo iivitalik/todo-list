@@ -12,10 +12,7 @@ urlpatterns = [
     path("tags/create/", views.TagsCreateView.as_view(), name="tags-create"),
     path("tags/<int:pk>/update/", views.TagUpdateView.as_view(), name="tags-update"),
     path("tags/<int:pk>/delete/", views.TagDeleteView.as_view(), name="tags-delete"),
-
     path("tasks/create/", views.TaskCreateView.as_view(), name="tasks-create"),
-    path("tasks/<int:pk>/update/", views.TagUpdateView.as_view(), name="tasks-update"),
-    path("tasks/<int:pk>/delete/", views.TagDeleteView.as_view(), name="tasks-delete"),
     path("tasks/<int:pk>/toggle/", views.toggle_task_status, name="tasks-toggle"),
 ]
 

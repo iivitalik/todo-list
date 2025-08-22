@@ -24,14 +24,14 @@ class TagsListView(ListView):
 class TaskCreateView(CreateView):
     model = Task
     fields = ("content", "deadline", "tags")
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("todo:index")
     template_name = "tasks-create.html"
 
 
 class TagsCreateView(CreateView):
     model = Tag
     fields = ("name", )
-    success_url = reverse_lazy("tags")
+    success_url = reverse_lazy("todo:tags")
     template_name = "tags-create.html"
 
 
