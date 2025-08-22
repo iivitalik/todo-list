@@ -7,7 +7,7 @@ from .models import Task, Tag
 
 
 def index(request):
-    tasks = Task.objects.all().order_by('-datetime')
+    tasks = Task.objects.all().order_by("-datetime")
 
     context = {
         'tasks': Task.objects.all()
@@ -50,6 +50,23 @@ class TagDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy("todo:tags")
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    fields = ("content", "deadline", "tags")
+    template_name = "tasks-update.html"
+
+    def get_success_url(self):
+        return reverse_lazy("todo:index")
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = "tasks-delete.html"
+
+    def get_success_url(self):
+        return reverse_lazy("todo:index")
 
 
 def toggle_task_status(request, pk):
