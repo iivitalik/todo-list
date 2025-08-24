@@ -16,8 +16,6 @@
     </tr>
   </thead>
   <tbody>
-
-
     {% for task in tasks %}
       <tr>
         <td>{{ task.content }} </td>
@@ -29,8 +27,6 @@
             <span class="text-muted">No tags</span>
           {% endfor %}
         </td>
-
-
         <td><a class="btn btn-warning btn-sm" href="{% url 'todo:tasks-update' task.id %}">Update</a></td>
         <td><a class="btn btn-danger btn-sm" href="{% url 'todo:tasks-delete' task.id %}">Delete</a></td>
         <td>
@@ -41,20 +37,19 @@
           {% endif %}
         </td>
         <td>
-    <form method="post" action="{% url 'todo:tasks-toggle' task.id %}">
-        {% csrf_token %}
-        {% if task.is_done %}
-            <button type="submit" class="btn btn-success btn-sm">Undo</button>
-        {% else %}
-            <button type="submit" class="btn btn-primary btn-sm">Complete</button>
-        {% endif %}
-    </form>
-</td>
+          <form method="post" action="{% url 'todo:tasks-toggle' task.id %}">
+            {% csrf_token %}
+            {% if task.done %}
+              <button type="submit" class="btn btn-success btn-sm">Undo</button>
+            {% else %}
+              <button type="submit" class="btn btn-primary btn-sm">Complete</button>
+            {% endif %}
+          </form>
+        </td>
       </tr>
-
     {% empty %}
       <tr>
-        <td colspan="6" class="text-center">No tasks yet</td>
+        <td colspan="7" class="text-center">No tasks yet</td>
       </tr>
     {% endfor %}
   </tbody>
